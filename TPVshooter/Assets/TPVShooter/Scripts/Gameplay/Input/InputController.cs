@@ -47,9 +47,46 @@ public class InputController : MonoBehaviour
     void Start()
     {
         controllable = CharacterBase.Character.GetComponent<IControllable>();
-        DontDestroyOnLoad(gameObject);
     }
+    private void Update()
+    {
+        // change weapon
+        if (Input.GetKeyDown(Reload))
+            reload = true;
+        else
+            reload = false;
+        if (Input.GetKeyDown(First))
+            first = true;
+        else
+            first = false;
+        if (Input.GetKeyDown(Second))
+            second = true;
+        else
+            second = false;
+        if (Input.GetKeyDown(Third))
+            third = true;
+        else
+            third = false;
+        controllable.ChangeWeapon(first, second, third, reload);
 
+        // jump button
+        if (Input.GetKeyDown(Jump))
+            jump = true;
+        else
+            jump = false;
+        controllable.JumpButton(jump);
+
+        //mouse button
+        if (Input.GetKey(MouseLeft))
+            mouseLeft = true;
+        else
+            mouseLeft = false;
+        if (Input.GetKeyDown(MouseRight))
+            mouseRight = true;
+        else
+            mouseRight = false;
+        controllable.MouseButton(mouseLeft, mouseRight);
+    }
     private void FixedUpdate()
     {
         // movement keys
@@ -70,39 +107,8 @@ public class InputController : MonoBehaviour
             shift = false;
         controllable.MovementKeys(buttonForward, buttonBackward, buttonLeft,buttonRight, shift);
 
-        // change weapon
-        if(Input.GetKeyDown(Reload))
-            reload = true; else
-            reload = false;
-        if(Input.GetKeyDown(First)) 
-            first = true; else
-            first = false;
-        if(Input.GetKeyDown(Second))
-            second = true; else
-            second = false;
-        if(!Input.GetKeyDown(Third))
-            third = true; else
-            third = false;
-        controllable.ChangeWeapon(first,second, third , reload);
-
-        // jump button
-        if(Input.GetKeyDown(Jump)) 
-            jump = true; else
-            jump = false;
-        controllable.JumpButton(jump);
-
-        //mouse button
-        if(Input.GetKey(MouseLeft))
-            mouseLeft = true; else
-            mouseLeft = false;
-        if (Input.GetKey(MouseRight))
-            mouseRight = true; else
-            mouseRight = false;
-        controllable.MouseButton(mouseLeft,mouseRight);
 
         // mouse aim
         controllable.MouseAim(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-
     }
 }
