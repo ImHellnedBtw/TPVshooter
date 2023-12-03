@@ -52,7 +52,7 @@ public abstract class EnemyBase : MonoBehaviour, IEnemy
                 {
                     agressive = true;
                 }
-                else
+                else if (hit.collider.gameObject != character || hit.distance > EnemyData.detectDistance)
                 {
                     if(EnemyData.movable == true)
                     Patrol();
@@ -100,7 +100,7 @@ public abstract class EnemyBase : MonoBehaviour, IEnemy
         if(randomRotateTime < Time.time)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Random.Range(90, 270), transform.eulerAngles.z);
-            randomRotateTime = Time.time + Random.Range(5, 10);
+            randomRotateTime = Time.time + Random.Range(3, 6);
         }
 
     }

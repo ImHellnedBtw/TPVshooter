@@ -19,4 +19,4 @@ MonoBehaviour:
   shootSpeed: 0.2
   damage: 3
   health: 200
-  detectDistance: 40
+  detectDistance: 50
